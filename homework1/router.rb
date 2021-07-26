@@ -24,24 +24,24 @@ get "/items/:id" do
              }
 end
 
-get "/items/edit/:id" do
+get "/items/:id/edit" do
   id = params["id"]
   item = get_item_detail(id)
   categories = get_all_categories
   erb :edit, locals: {
-               item: item,
-               categories: categories,
-             }
+           item: item,
+           categories: categories,
+         }
 end
 
-get "/items/delete/:id" do
+get "/items/:id/delete" do
   id = params["id"]
   delete_item(id)
 
   redirect "/"
 end
 
-put "/items/edit/:id" do
+put "/items/:id/edit" do
   id = params["id"]
   name = params["name"]
   price = params["price"]
