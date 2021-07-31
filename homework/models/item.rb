@@ -47,11 +47,10 @@ class Item
     item
   end
   
-  # def add_item(params)
-  #   item.save
-  #   item_id = find_all.last.id
-  #   item_category.add_item_category(item_id, params['category_id'])
-  # end
+  def self.remove_by_id(id)
+    client = create_db_client
+    client.query("delete from items where id = #{id}")
+  end
 
   def self.convert_sql_result_to_array(result)
     items = Array.new

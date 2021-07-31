@@ -25,6 +25,10 @@ get "/items/:id" do
   controller.find_item(params)
 end
 
+get "/items/:id/delete" do
+  controller = $item_controller
+  controller.delete_item(params)
+end
 
 # get "/items/:id/edit" do
 #   id = params["id"]
@@ -36,12 +40,6 @@ end
 #   }
 # end
 
-# get "/items/:id/delete" do
-#   id = params["id"]
-#   delete_item(id)
-
-#   redirect "/"
-# end
 
 # put "/items/:id/edit" do
 #   id = params["id"]

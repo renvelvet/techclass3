@@ -39,4 +39,10 @@ class ItemController
 
     list_item
   end
+
+  def delete_item(params)
+    Item.remove_by_id(params['id'])
+    ItemCategory.remove_by_item_id(params['id'])
+    list_item
+  end
 end

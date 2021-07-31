@@ -16,16 +16,6 @@ class ItemCategory
     client.query("insert into item_categories(item_id, category_id) values (#{item_id}, #{category_id})")
   end
 
-  # def add_item_category(item_id, category_id)
-  #   item_category = ItemCategory.new({
-  #     item_id: item_id,
-  #     category_id: category_id
-  #   })
-
-  #   item_category.save
-  #   item_category
-  # end
-
   def self.find_all
     client = create_db_client
     raw_data = client.query("select * from item_categories")
@@ -40,6 +30,11 @@ class ItemCategory
     where item_id = #{id}")
    
     convert_sql_result_to_array(raw_data).first
+  end
+
+  def self.remove_by_item_id(item_id)
+    client = create_db_client
+    client.query("delete from item_categories where item_id = #{item_id}")
   end
 
   def self.convert_sql_result_to_array(result)
