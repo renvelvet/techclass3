@@ -47,6 +47,14 @@ class Item
     item
   end
   
+  def update 
+    return false unless valid?
+
+    client = create_db_client
+    client.query("update items set name = '#{name}', price = #{price}
+    where id = #{id}")
+  end
+
   def self.remove_by_id(id)
     client = create_db_client
     client.query("delete from items where id = #{id}")

@@ -25,29 +25,21 @@ get "/items/:id" do
   controller.find_item(params)
 end
 
+get "/items/:id/edit" do
+  controller = $item_controller
+  controller.edit_item(params)
+end
+
+put "/items/:id/edit" do
+  controller = $item_controller
+  controller.update_item(params)
+end
+
 get "/items/:id/delete" do
   controller = $item_controller
   controller.delete_item(params)
 end
 
-# get "/items/:id/edit" do
-#   id = params["id"]
-#   item = get_item_detail(id)
-#   categories = get_all_categories
-#   erb :edit, locals: {
-#     item: item,
-#     categories: categories,
-#   }
-# end
 
 
-# put "/items/:id/edit" do
-#   id = params["id"]
-#   name = params["name"]
-#   price = params["price"]
-#   category_id = params["category_id"]
-
-#   edit_item(id, name, price, category_id)
-#   redirect "/"
-# end
 

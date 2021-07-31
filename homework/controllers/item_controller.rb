@@ -40,6 +40,30 @@ class ItemController
     list_item
   end
 
+  def edit_item(params)
+    item = Item.find_with_categories(params['id'])
+    categories = Category.find_all
+    renderer = ERB.new(File.read('./views/edit_item.erb'))
+    renderer.result(binding)
+  end
+
+  def update_item(params)
+    item = Item.new({
+      id: params['id'],
+      name: params['name'],
+      price: params['price']
+    })
+    item.update
+
+    item_category = ItemCategory.new({
+      item_id: params['id'],
+      category_id: params['category_id']
+    })
+    item_category.update
+
+    list_item
+  end
+
   def delete_item(params)
     Item.remove_by_id(params['id'])
     ItemCategory.remove_by_item_id(params['id'])

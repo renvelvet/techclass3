@@ -52,6 +52,14 @@ class ItemCategory
     item_categories
   end
 
+  def update 
+    return false unless valid?
+
+    client = create_db_client
+    client.query("update item_categories set category_id = #{category_id}
+    where item_id = #{item_id}")
+  end
+
   def valid?
     return false if @item_id.nil?
     return false if @category_id.nil?
