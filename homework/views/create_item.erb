@@ -5,7 +5,7 @@
     <input name="price" type="text" placeholder="Item price" />
     <select name="category_id" form="post">      
       <% categories.each do |category| %> 
-        <option value="<%= category["id"] %>" selected><%= category["name"] %></option>
+        <option value="<%= category.id %>" selected ><%= category.name %></option>
       <% end %>
     </select>
     <button type="submit">Add Item</button>

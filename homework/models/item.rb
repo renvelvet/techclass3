@@ -11,6 +11,13 @@ class Item
     @categories = []
   end
 
+  def save
+    return false unless valid?
+
+    client = create_db_client
+    client.query("insert into items (name, price) values('#{name}', #{price})")    
+  end
+
   def self.find_all
     client = create_db_client
     raw_data = client.query("select * from items")
@@ -24,7 +31,6 @@ class Item
     from items
     where items.id = #{id}")
    
-    p convert_sql_result_to_array(raw_data).first 
     convert_sql_result_to_array(raw_data).first
   end
 
@@ -40,11 +46,12 @@ class Item
     item.categories = Category.find_by_id(raw_data.first['category_id'])
     item
   end
-
-  def valid?
-    return false if @name.nil?
-    return false if @price.nil?
-  end
+  
+  # def add_item(params)
+  #   item.save
+  #   item_id = find_all.last.id
+  #   item_category.add_item_category(item_id, params['category_id'])
+  # end
 
   def self.convert_sql_result_to_array(result)
     items = Array.new
@@ -60,5 +67,11 @@ class Item
     end
 
     items
+  end
+
+  def valid?
+    return false if @name.nil?
+    return false if @price.nil?
+    true
   end
 end

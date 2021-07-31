@@ -1,11 +1,23 @@
 require "sinatra"
 require_relative './controllers/item_controller'
+require_relative './controllers/item_category_controller'
 
 $item_controller = ItemController.new
+# $item_category_controller = ItemCategoryController.new
 
 get "/" do
   controller = $item_controller
   controller.list_item
+end
+
+get "/items/new" do
+  controller = $item_controller
+  controller.new_item
+end
+
+post "/items/create" do
+  controller = $item_controller
+  controller.create_item(params)
 end
 
 get "/items/:id" do
@@ -13,13 +25,6 @@ get "/items/:id" do
   controller.find_item(params)
 end
 
-# get "/items/new" do
-#   categories = get_all_categories
-
-#   erb :create, locals: {
-#     categories: categories
-#   }
-# end
 
 # get "/items/:id/edit" do
 #   id = params["id"]
@@ -48,11 +53,3 @@ end
 #   redirect "/"
 # end
 
-# post "/items/create" do
-#   name = params["name"]
-#   price = params["price"]
-#   category_id = params["category_id"]
-
-#   create_new_item(name, price, category_id)
-#   redirect "/"
-# end

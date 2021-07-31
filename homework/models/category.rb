@@ -1,3 +1,5 @@
+require_relative '../db/mysql_connector'
+
 class Category
     attr_accessor :name, :id
   
