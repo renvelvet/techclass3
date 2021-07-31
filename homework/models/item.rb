@@ -16,15 +16,10 @@ class Item
     raw_data = client.query("select * from items")
     items = Array.new
   
-    raw_data.each do |data|
-      item = Item.new(data["name"], data["price"], data["id"])
-      items.push(item)
-    end
-  
-    items
+    convert_sql_result_to_array(raw_data)
   end
 
-  def self.find_item(id)
+  def self.find_by_id(id)
     client = create_db_client
     raw_data = client.query("select items.id, items.name, items.price, categories.name as 'category_name', categories.id as 'category_id'
     from items
@@ -32,11 +27,7 @@ class Item
     join categories on item_categories.category_id = categories.id 
     where items.id = #{id}")
    
-    data = raw_data.first
-    category = Category.new(data["category_name"], data["category_id"])
-    item = Item.new(data["name"], data["price"], data["id"], category)
-  
-    item
+    convert_sql_result_to_array(raw_data).first
   end
 
   def valid?
