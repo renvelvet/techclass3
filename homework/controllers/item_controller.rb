@@ -36,5 +36,7 @@ class ItemController
       category_id: params['category_id']
     })
     item_category.save
+
+    list_item
   end
 end
