@@ -12,7 +12,7 @@ class ItemController
   def find_item(params)
     item = Item.find_with_categories(params['id'])
     if item != nil
-      renderer = ERB.new(File.read('./views/show.erb'))
+      renderer = ERB.new(File.read('./views/show_item.erb'))
       renderer.result(binding)
     end
   end
