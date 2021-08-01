@@ -3,11 +3,13 @@
   <form method="POST" action="/items/create" id="post">
     <input name="name" type="text" placeholder="Item name" />
     <input name="price" type="text" placeholder="Item price" />
-    <select name="category_id" form="post">      
-      <% categories.each do |category| %> 
-        <option value="<%= category.id %>" selected ><%= category.name %></option>
-      <% end %>
-    </select>
+    <div>
+    <% categories.each do |category| %> 
+      <input type="checkbox" name="category_id[]" value="<%= category.id %>">
+      <label for="category_id"><%= category.name %></label><br>
+    <% end %>  
+    </div>
     <button type="submit">Add Item</button>
   </form>
 </body>
+    

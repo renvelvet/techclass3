@@ -36,14 +36,24 @@ class Item
 
   def self.find_with_categories(id)
     client = create_db_client
-    raw_data = client.query("select items.id, items.name, items.price, categories.name as 'category_name', categories.id as 'category_id'
-    from items
-    join item_categories on items.id = item_categories.item_id
-    join categories on item_categories.category_id = categories.id 
-    where items.id = #{id}")
+    raw_data = client.query("select item_id, category_id, categories.name
+    from categories
+    join item_categories on categories.id = item_categories.category_id
+    where item_id = #{id}
+    order by category_id asc")
 
+    categories = []
     item = find_by_id(id)
-    item.categories = Category.find_by_id(raw_data.first['category_id'])
+    raw_data.each do |row|
+      category = Category.new({
+        name: row['name'],
+        id: row['category_id']
+      })
+      categories << category
+    end
+
+    item.categories = categories
+    p item
     item
   end
   

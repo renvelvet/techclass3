@@ -1,4 +1,8 @@
 <h1>Item Detail</h1>
 <p>Item name: <%= item.name %></p>
 <p>Item price: <%= item.price %></p>
-<p>Item category: <%= item.categories.name %></p>
+<% category_name = [] %>
+<% item.categories.each do |category| %>
+  <% category_name << category.name %>
+<% end %>
+<p>Item category: <%= category_name.join(", ") %></p>

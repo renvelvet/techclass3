@@ -24,20 +24,25 @@ class ItemController
   end
 
   def create_item(params)
-    item = Item.new({
-      name:params['name'],
-      price: params['price']
-    })
-    item.save
+    unless params['category_id'].nil?
+      item = Item.new({
+        name:params['name'],
+        price: params['price']
+      })
+      item.save
 
-    item_id = Item.find_all.last.id
-    item_category = ItemCategory.new({
-      item_id: item_id,
-      category_id: params['category_id']
-    })
-    item_category.save
+      item_id = Item.find_all.last.id
 
-    list_item
+      params['category_id'].each do |category_id|
+        item_category = ItemCategory.new({
+          item_id: item_id,
+          category_id: category_id.to_i
+        })
+        item_category.save
+      end
+
+      list_item
+    end
   end
 
   def edit_item(params)
