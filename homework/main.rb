@@ -1,9 +1,9 @@
 require "sinatra"
 require_relative './controllers/item_controller'
-require_relative './controllers/item_category_controller'
+require_relative './controllers/category_controller'
 
 $item_controller = ItemController.new
-# $item_category_controller = ItemCategoryController.new
+$category_controller = CategoryController.new
 
 get "/" do
   controller = $item_controller
@@ -40,6 +40,7 @@ get "/items/:id/delete" do
   controller.delete_item(params)
 end
 
-
-
-
+get "/categories" do
+  controller = $category_controller
+  controller.list_category
+end
