@@ -8,6 +8,18 @@ class Category
       @id = params[:id]
     end
 
+    def save
+      return false unless valid?
+
+      client = create_db_client
+      client.query("insert into categories(name) values('#{name}')")
+    end
+
+    def valid?
+      return false if @name.nil?
+      true
+    end
+    
     def self.find_all
       client = create_db_client
       raw_data = client.query("select * from categories order by id asc")
