@@ -10,7 +10,7 @@ class Category
 
     def self.find_all
       client = create_db_client
-      raw_data = client.query("select * from categories")
+      raw_data = client.query("select * from categories order by id asc")
 
       convert_sql_result_to_array(raw_data)
     end
