@@ -1,6 +1,6 @@
 I use this repo to post my class activities and homework from Module 3 & 4 as my learning journey with Generasi GIGIH. To directly jump into my work, click the item below:
-<!-- * [Class activity - Session 1](./activity1) -->
+* [Class activity](./class_activity)
 * [Homework](./homework)
 
-###To Do:
-⋅⋅*Create link/path/button to home
+### To Do:
+⋅⋅* Create link/path/button to home
