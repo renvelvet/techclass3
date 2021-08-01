@@ -7,7 +7,7 @@
     <select name="category_id" form="edit">
       <% categories.each do |category| %>
         <option value="<%= category.id %>"
-        <% if category.name == item.categories.name %>
+        <% if category.name == item.categoriesitem.categories.name %>
           selected
         <% end %>
         ><%= category.name %></option>

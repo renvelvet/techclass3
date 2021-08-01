@@ -21,4 +21,20 @@ class CategoryController
 
     list_category
   end
+
+  def edit_category(params)
+    category = Category.find_by_id(params['id'])
+    renderer = ERB.new(File.read('./views/edit_category.erb'))
+    renderer.result(binding)
+  end
+
+  def update_category(params)
+    category = Category.new({
+      id: params['id'],
+      name: params['name'],
+    })
+    category.update
+
+    list_category
+  end
 end

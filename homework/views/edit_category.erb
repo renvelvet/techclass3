@@ -1,0 +1,9 @@
+<body>
+  <h1>Edit Category: <%= category.name %></h1>
+  <form action="/categories/<%= category.id %>/edit" method="POST" id="edit">
+    <input type="hidden" name="_method" value="PUT" />
+    <input name="name" type="text" value ="<%= category.name %>" />
+    
+    <button type="submit">Update Category</button>
+  </form>
+</body>

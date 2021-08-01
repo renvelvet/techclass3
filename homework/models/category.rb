@@ -19,7 +19,7 @@ class Category
       return false if @name.nil?
       true
     end
-    
+
     def self.find_all
       client = create_db_client
       raw_data = client.query("select * from categories order by id asc")
@@ -34,6 +34,14 @@ class Category
       where categories.id = #{id}")
      
       convert_sql_result_to_array(raw_data).first
+    end
+    
+    def update 
+      return false unless valid?
+  
+      client = create_db_client
+      client.query("update categories set name = '#{name}'
+      where id = #{id}")
     end
 
     def self.convert_sql_result_to_array(result)
