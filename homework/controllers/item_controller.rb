@@ -60,11 +60,14 @@ class ItemController
     })
     item.update
 
-    item_category = ItemCategory.new({
-      item_id: params['id'],
-      category_id: params['category_id']
-    })
-    item_category.update
+    ItemCategory.remove_by_item_id(params['id'])
+    params['category_id'].each do |category_id|
+      item_category = ItemCategory.new({
+        item_id: params['id'],
+        category_id: category_id.to_i
+      })
+      item_category.save
+    end
 
     list_item
   end

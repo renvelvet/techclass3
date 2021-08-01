@@ -3,16 +3,19 @@
   <form action="/items/<%= item.id %>/edit" method="POST" id="edit">
     <input type="hidden" name="_method" value="PUT" />
     <input name="name" type="text" value ="<%= item.name %>" />
-    <input name="price" type="text" value="<%= item.price %>" />    
-    <select name="category_id" form="edit">
-      <% categories.each do |category| %>
-        <option value="<%= category.id %>"
-        <% if category.name == item.categoriesitem.categories.name %>
-          selected
-        <% end %>
-        ><%= category.name %></option>
+    <input name="price" type="text" value="<%= item.price %>" />
+    <div>
+    <% categories_name = item.categories.map {|category| category.name} %>
+    <% categories.each do |category| %> 
+      <input type="checkbox" name="category_id[]" value="<%= category.id %>"
+      <% if categories_name.include?(category.name) %>
+        checked
       <% end %>
-    </select>
+      >
+      <label for="category_id"><%= category.name %></label><br>
+    <% end %>  
+    </div>
+    
     <button type="submit">Update Item</button>
   </form>
 </body>

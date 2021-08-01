@@ -1,4 +1,5 @@
 require_relative '../db/mysql_connector'
+require_relative './item'
 
 class ItemCategory
   attr_accessor :item_id, :category_id
@@ -21,15 +22,6 @@ class ItemCategory
     raw_data = client.query("select * from item_categories")
 
     convert_sql_result_to_array(raw_data)
-  end
-
-  def self.find_by_item_id(id)
-    client = create_db_client
-    raw_data = client.query("select *
-    from item_categories
-    where item_id = #{id}")
-   
-    convert_sql_result_to_array(raw_data).first
   end
 
   def self.remove_by_item_id(item_id)
