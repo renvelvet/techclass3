@@ -44,3 +44,13 @@ get "/categories" do
   controller = $category_controller
   controller.list_category
 end
+
+get "/categories/new" do
+  controller = $category_controller
+  controller.new_category
+end
+
+post "/categories/create" do
+  controller = $category_controller
+  controller.create_category(params)
+end
