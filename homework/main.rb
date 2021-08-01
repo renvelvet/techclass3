@@ -55,6 +55,11 @@ post "/categories/create" do
   controller.create_category(params)
 end
 
+get "/categories/:id" do
+  controller = $category_controller
+  controller.find_category(params)
+end
+
 get "/categories/:id/edit" do
   controller = $category_controller
   controller.edit_category(params)

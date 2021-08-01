@@ -1,0 +1,7 @@
+<h1><%= category.name.capitalize %>'s Items</h1>
+
+<ul>
+  <% category.items.each do |item| %>
+  <li><%= item.name %></li>
+  <% end %>
+</ul>

@@ -1,11 +1,12 @@
 require_relative '../db/mysql_connector'
 
 class Category
-  attr_accessor :name, :id
+  attr_accessor :name, :id, :items
   
   def initialize(params)
     @name = params[:name]
     @id = params[:id]
+    @items = []
   end
 
   def save
@@ -36,6 +37,28 @@ class Category
     convert_sql_result_to_array(raw_data).first
   end
     
+  def self.find_with_items(id)
+    client = create_db_client
+    raw_data = client.query("select items.id, items.name, items.price
+    from items
+    join item_categories on item_id = items.id
+    where category_id = #{id}")
+
+    category = find_by_id(id)
+    items = []
+    raw_data.each do |row|
+      item = Item.new({
+        id: row['id'],
+        name: row['name'],
+        price: row['price']
+      })
+      items << item
+    end
+
+    category.items = items
+    category
+  end
+
   def update 
     return false unless valid?
   

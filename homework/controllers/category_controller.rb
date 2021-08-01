@@ -8,6 +8,14 @@ class CategoryController
     renderer.result(binding)
   end
 
+  def find_category(params)
+    category = Category.find_with_items(params['id'])
+    if category != nil
+      renderer = ERB.new(File.read('./views/show_category.erb'))
+      renderer.result(binding)
+    end
+  end
+
   def new_category
     renderer = ERB.new(File.read('./views/create_category.erb'))
     renderer.result(binding)
