@@ -36,6 +36,11 @@ class ItemCategory
     client = create_db_client
     client.query("delete from item_categories where item_id = #{item_id}")
   end
+  
+  def self.remove_by_category_id(category_id)
+    client = create_db_client
+    client.query("delete from item_categories where category_id = #{category_id}")
+  end
 
   def self.convert_sql_result_to_array(result)
     item_categories = Array.new

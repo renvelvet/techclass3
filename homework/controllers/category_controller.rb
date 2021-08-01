@@ -37,4 +37,10 @@ class CategoryController
 
     list_category
   end
+
+  def delete_category(params)
+    Category.remove_by_id(params['id'])
+    ItemCategory.remove_by_category_id(params['id'])
+    list_category
+  end
 end

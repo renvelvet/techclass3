@@ -47,7 +47,7 @@ class Category
     
   def self.remove_by_id(id)
     client = create_db_client
-    client.query("delete from items where id = #{id}")
+    client.query("delete from categories where id = #{id}")
   end
 
   def self.convert_sql_result_to_array(result)

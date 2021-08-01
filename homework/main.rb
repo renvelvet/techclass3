@@ -64,3 +64,8 @@ put "/categories/:id/edit" do
   controller = $category_controller
   controller.update_category(params)
 end
+
+get "/categories/:id/delete" do
+  controller = $category_controller
+  controller.delete_category(params)
+end
