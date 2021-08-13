@@ -7,6 +7,7 @@ branches:
 before_install:
 - openssl aes-256-cbc -K $encrypted_8e50ff012f2a_key -iv $encrypted_8e50ff012f2a_iv
   -in id_ed25519.enc -out id_ed25519 -d
+- chmod 400 id_ed25519
 
 install:
 - pip install ansible
